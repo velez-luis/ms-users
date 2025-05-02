@@ -50,14 +50,9 @@ localhost:9090/api/v1/users
     ]
 }
 ```
-- La URL (Método Get) y el payload de la petición para la obtención de un usuario es el siguiente:
+- La URL (Método Get) de la petición para la obtención de un usuario es el siguiente:
 ``` http request
-localhost:9090/api/v1/users/{id}
-```
-``` json
-{
-    "id": 1
-}
+localhost:9090/api/v1/users/email/{email}
 ```
 ## Run maven application
 Para ejecutar la aplicación, se debe ejecutar el siguiente comando en la raíz del proyecto:
