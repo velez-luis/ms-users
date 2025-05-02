@@ -1,0 +1,16 @@
+services:
+  ms-users:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: company/springboot-app:${TAG:-latest}
+    container_name: ms-users
+    ports:
+      - "9090:9090"
+    networks:
+      - backend-network
+    restart: unless-stopped
+
+networks:
+  backend-network:
+    driver: bridge

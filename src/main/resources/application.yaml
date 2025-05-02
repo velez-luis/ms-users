@@ -1,0 +1,61 @@
+server:
+    servlet:
+        context-path: /api
+    port: 9090
+spring:
+    application:
+        name: ms-users
+    datasource:
+        url: ${H2_DB_URL:jdbc:h2:mem:usersdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE}
+        driver-class-name: org.h2.Driver
+        username: ${H2_DB_USERNAME:sa}
+        password: ${H2_DB_PASSWORD:}
+        initialization-mode: always
+    h2:
+        console:
+            enabled: true
+            path: /h2-console
+            settings:
+                trace: true
+                web-allow-others: false
+    jpa:
+        hibernate:
+            ddl-auto: create
+        show-sql: false
+        properties:
+            hibernate:
+                format_sql: true
+        defer-data-source-initialization: true
+    jackson:
+        serialization:
+            fail-on-empty-beans: false
+    banner:
+        location: classpath:/static/banner.txt
+
+springdoc:
+    api-docs:
+        path: /v3/api-docs
+    swagger-ui:
+        path: /swagger-ui.html
+        tags-sorter: alpha
+        operations-sorter: alpha
+    cache:
+        disabled: true
+
+logging:
+    level:
+        org:
+            springframework:
+                web: DEBUG
+                security: INFO
+                data: DEBUG
+        jakarta:
+            persistence: WARN
+
+#Bloque para definir/cambiar el comportamiento de la validacion del password
+app:
+    security:
+        password:
+            validation:
+                pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-={}\\[\\]:;\"'<>,.?/~`]).{8,15}$"
+                message: 'La contraseña debe contener: 8-15 caracteres, al menos una mayúscula, una minúscula, un número y un carácter especial (@#$%^&+=)'
